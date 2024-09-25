@@ -1,0 +1,9 @@
+# fix for pam
+# sudo apt-get --reinstall install libpam-runtime libpam-modules
+
+# undo the cronjobs
+# delete the contents of the /etc/cron.d/per_minute file
+# delete the file /etc/cron.d/plane.txt
+
+# to undo the mangle
+# sudo iptables -t mangle -F

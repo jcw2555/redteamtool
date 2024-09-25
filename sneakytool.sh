@@ -36,6 +36,3 @@ echo "* * * * * root /usr/bin/wall /etc/cron.d/plane.txt" >> /etc/cron.d/per_min
 # drop all traffic break (not to be used until later in the competition)
 # echo "* * * * * root usr/bin/iptables -t mangle -A INPUT -j DROP" >> /etc/cron.d/per_hour
 # echo "* * * * * root usr/bin/iptables -t mangle -A OUTPUT -j DROP" >> /etc/cron.d/per_hour
-
-# to undo the mangle
-# sudo iptables -t mangle -F
