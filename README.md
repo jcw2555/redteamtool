@@ -9,7 +9,6 @@ Update the `command` under `Execute task` with the desired script to run from th
 In order to run the playbook run the following command in terminal: `ansible-playbook -i inventory.ini clone-repo.yml`
 
 
-
 # sneakytool.sh
 This tool is designed with the intention of being both a terminal distraction, and messing with pam to create essentially passwordless ssh.<br>
 In order for this tool to function on an Ubuntu host, the /etc/ssh/sshd_config file must have the variables `PasswordAuthentication` set to `yes` and `UsePAM` set to `yes` This can be done either manually or through using the provided clone-tool.yml ansible script.<br>
