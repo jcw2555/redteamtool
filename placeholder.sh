@@ -1,1 +1,0 @@
-echo 'Run Future Red Team Tool Here!!'
