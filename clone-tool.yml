@@ -4,6 +4,17 @@
   become: yes
   tasks:
 
+# Update Apt package index
+  - name: Update apt package index
+    apt: 
+      update_cache: yes
+
+# Install Git
+  - name: Install Git
+    apt:
+      name: git
+      state: present
+
 # Reach out to github and download the repo with my red team tool
   - name: Clone git with red team tool
     ansible.builtin.git:
